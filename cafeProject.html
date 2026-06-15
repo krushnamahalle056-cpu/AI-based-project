@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krushna Café | Fresh Coffee, Warm Moments</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --espresso: #4E342E;
+            --latte: #FDFBF7;
+            --beige: #EFEBE9;
+            --green: #81C784;
+            --dark-green: #2E7D32;
+            --white: #FFFFFF;
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--latte);
+            color: var(--espresso);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background-color: rgba(253, 251, 247, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo { font-size: 1.8rem; font-weight: 700; color: var(--espresso); }
+        .logo span { color: var(--green); }
+
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { font-weight: 500; transition: var(--transition); }
+        .nav-links a:hover { color: var(--green); }
+        
+        /* Mobile Menu Button (Hidden on Desktop) */
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(78, 52, 46, 0.6), rgba(78, 52, 46, 0.6)), url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax Effect */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+        }
+
+        .hero h1 { font-size: 4rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .hero p { font-size: 1.5rem; margin-bottom: 2rem; font-weight: 300; }
+        
+        .btn {
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+        
+        .btn-primary { background-color: var(--green); color: var(--white); }
+        .btn-primary:hover { background-color: var(--dark-green); transform: translateY(-3px); }
+
+        /* --- SECTIONS GENERAL --- */
+        section { padding: 4rem 10%; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: var(--espresso); }
+        .section-title span { border-bottom: 3px solid var(--green); }
+
+        /* --- ABOUT US --- */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .about-img img { width: 100%; border-radius: 15px; box-shadow: 10px 10px 0px var(--beige); }
+        
+        /* --- MENU --- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .menu-card:hover { transform: translateY(-5px); border-color: var(--green); }
+        .menu-icon { font-size: 2.5rem; color: var(--green); margin-bottom: 1rem; }
+        .menu-item { display: flex; justify-content: space-between; margin-top: 10px; border-bottom: 1px dashed #ccc; padding-bottom: 5px;}
+        .price { font-weight: 600; color: var(--green); }
+
+        /* --- SPECIAL OFFERS --- */
+        .special-offer {
+            background-color: var(--beige);
+            text-align: center;
+            border-radius: 20px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .tag { background: var(--espresso); color: var(--white); padding: 5px 15px; border-radius: 5px; font-size: 0.9rem; display: inline-block; margin-bottom: 1rem;}
+
+        /* --- GALLERY --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .gallery-item img { width: 100%; height: 250px; object-fit: cover; border-radius: 10px; transition: var(--transition); }
+        .gallery-item img:hover { transform: scale(1.03); filter: brightness(0.9); }
+
+        /* --- REVIEWS --- */
+        .reviews-container { display: flex; gap: 2rem; overflow-x: auto; padding-bottom: 1rem; }
+        .review-card {
+            background: var(--white);
+            min-width: 300px;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .stars { color: #FFD700; margin-bottom: 10px; }
+
+        /* --- CONTACT & FOOTER --- */
+        .footer {
+            background-color: var(--espresso);
+            color: var(--latte);
+            padding: 4rem 10% 1rem;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+        .social-icons a { font-size: 1.5rem; margin-right: 15px; color: var(--green); transition: var(--transition); }
+        .social-icons a:hover { color: var(--white); }
+        .map-container iframe { width: 100%; height: 200px; border-radius: 10px; border: none; }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Simplified for demo */
+            .menu-toggle { display: block; }
+            .about-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Krushna <span>Café</span></div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#menu">Menu</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <header class="hero">
+        <h1>Fresh Coffee, Warm Moments</h1>
+        <p>Your cozy corner for the perfect brew and good vibes.</p>
+        <button class="btn btn-primary" onclick="location.href='#menu'">View Menu</button>
+    </header>
+
+    <section id="about">
+        <div class="section-title"><span>Our Story</span></div>
+        <div class="about-container">
+            <div class="about-img">
+                <img src="https://i.pinimg.com/474x/74/80/b2/7480b2bab89c9f6d39cdbf658c59c872.jpg" alt="Cafe Interior">
+            </div>
+            <div class="about-text">
+                <h3>Welcome to Krushna's World</h3>
+                <p>Located in the heart of the city, Krushna Café started with a simple dream: to create a space where coffee isn't just a drink, but a conversation starter.</p>
+                <br>
+                <p>Whether you are a student looking for a quiet study corner, or friends catching up after a long week, our warm lighting and aroma of freshly ground beans welcome you home.</p>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <section id="menu">
+        <div class="section-title"><span>Our Menu</span></div>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <i class="fas fa-mug-hot menu-icon"></i>
+                <h3>Coffee</h3>
+                <div class="menu-item"><p>Cappuccino</p> <span class="price">25 Rs</span></div>
+                <div class="menu-item"><p>Hazelnut Latte</p> <span class="price">35 Rs</span></div>
+                <div class="menu-item"><p>Espresso Shot</p> <span class="price">45 Rs</span></div>
+            </div>
+            <div class="menu-card">
+                <i class="fas fa-leaf menu-icon"></i>
+                <h3>Tea & Brews</h3>
+                <div class="menu-item"><p>Masala Chai</p> <span class="price">20 Rs</span></div>
+                <div class="menu-item"><p>Green Matcha</p> <span class="price">30 Rs</span></div>
+                <div class="menu-item"><p>Lemon Iced Tea</p> <span class="price">40 Rs</span></div>
+            </div>
+            <div class="menu-card">
+                <i class="fas fa-bread-slice menu-icon"></i>
+                <h3>Snacks</h3>
+                <div class="menu-item"><p>Avocado Toast</p> <span class="price">80 Rs</span></div>
+                <div class="menu-item"><p>Cheese Croissant</p> <span class="price">55 Rs</span></div>
+                <div class="menu-item"><p>Club Sandwich</p> <span class="price">65 Rs</span></div>
+            </div>
+            <div class="menu-card">
+                <i class="fas fa-cookie-bite menu-icon"></i>
+                <h3>Desserts</h3>
+                <div class="menu-item"><p>Choco Brownie</p> <span class="price">50 Rs</span></div>
+                <div class="menu-item"><p>Cheesecake</p> <span class="price">60 Rs</span></div>
+                <div class="menu-item"><p>Tiramisu</p> <span class="price">75 Rs</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="offers">
+        <div class="special-offer">
+            <span class="tag">TODAY'S SPECIAL</span>
+            <h2>Krushna's Signature Caramel Macchiato</h2>
+            <p>Get 20% off when you order with a slice of Cheesecake!</p>
+            <br>
+            <button class="btn btn-primary">Claim Offer</button>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="section-title"><span>Moments</span></div>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=500&q=60" alt="Coffee Cup"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=500&q=60" alt="Cafe Vibes"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1505935428862-770b6f24f629?auto=format&fit=crop&w=500&q=60" alt="Pastries"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=500&q=60" alt="Friends Meeting"></div>
+        </div>
+    </section>
+
+    <section id="reviews" style="background-color: var(--latte);">
+        <div class="section-title"><span>Customer Love</span></div>
+        <div class="reviews-container">
+            <div class="review-card">
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p>"The best place to study! The wifi is fast and the coffee keeps me going. Highly recommend the Latte."</p>
+                <br><strong>- Rahul M.</strong>
+            </div>
+            <div class="review-card">
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                <p>"Such a cozy vibe. Krushna is a great host and makes you feel right at home."</p>
+                <br><strong>- Sneha P.</strong>
+            </div>
+            <div class="review-card">
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p>"The avocado toast is to die for! My new weekend breakfast spot."</p>
+                <br><strong>- Arjun K.</strong>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="footer">
+        <div class="footer-content">
+            <div class="contact-info">
+                <h2>Krushna Café</h2>
+                <p>Fresh Coffee, Warm Moments.</p>
+                <br>
+                <p><i class="fas fa-map-marker-alt"></i> 123,Yavatmal , City Center</p>
+                <p><i class="fas fa-phone"></i> +91 9322038346</p>
+                <p><i class="fas fa-envelope"></i> hello@krushnacafe.com</p>
+                <br>
+                <h3>Opening Hours</h3>
+                <p>Mon - Sun: 8:00 AM - 10:00 PM</p>
+            </div>
+
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.1!2d-73.98!3d40.75!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM40zMCcyNS4xIk4gNzPCsDU4JzU5LjkiVw!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+
+            <div class="socials">
+                <h3>Follow Us</h3>
+                <br>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p>&copy; 2024 Krushna Café. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
