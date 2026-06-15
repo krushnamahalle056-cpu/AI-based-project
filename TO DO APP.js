@@ -1,33 +1,62 @@
-function addTask() {
-    let input = document.getElementById("taskInput");
-    let taskText = input.value.trim();
+const taskInput = document.getElementById("taskInput");
+const taskList = document.getElementById("taskList");
+const taskCount = document.getElementById("taskCount");
 
-    if(taskText === ""){
+let count = 0;
+
+function addTask() {
+
+    const task = taskInput.value.trim();
+
+    if(task === ""){
         alert("Please enter a task!");
         return;
     }
 
-    let li = document.createElement("li");
+    const li = document.createElement("li");
 
-    let span = document.createElement("span");
-    span.textContent = taskText;
+    li.innerHTML = `
+        <span class="task-text">${task}</span>
 
-    span.onclick = function() {
-        span.classList.toggle("completed");
-    };
+        <div class="actions">
+            <button class="complete-btn">
+                <i class="fa-solid fa-check"></i>
+            </button>
 
-    let deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
-    deleteBtn.classList.add("delete-btn");
+            <button class="delete-btn">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </div>
+    `;
 
-    deleteBtn.onclick = function() {
+    taskList.appendChild(li);
+
+    count++;
+    updateCount();
+
+    const completeBtn = li.querySelector(".complete-btn");
+    const deleteBtn = li.querySelector(".delete-btn");
+    const taskText = li.querySelector(".task-text");
+
+    completeBtn.addEventListener("click", () => {
+        taskText.classList.toggle("completed");
+    });
+
+    deleteBtn.addEventListener("click", () => {
         li.remove();
-    };
+        count--;
+        updateCount();
+    });
 
-    li.appendChild(span);
-    li.appendChild(deleteBtn);
-
-    document.getElementById("taskList").appendChild(li);
-
-    input.value = "";
+    taskInput.value = "";
 }
+
+function updateCount(){
+    taskCount.textContent = `${count} Tasks`;
+}
+
+taskInput.addEventListener("keypress", function(e){
+    if(e.key === "Enter"){
+        addTask();
+    }
+});
