@@ -3,22 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
-    <link rel="stylesheet" href="to do style.css">
+    <title>Smart To-Do List</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
-    <div class="container">
-        <h1>To-Do List</h1>
+    <div class="todo-container">
 
-        <div class="input-box">
-            <input type="text" id="taskInput" placeholder="Enter a task">
-            <button onclick="addTask()">Add</button>
+        <h1><i class="fa-solid fa-list-check"></i> Smart To-Do List</h1>
+
+        <div class="input-section">
+            <input type="text" id="taskInput" placeholder="Add a new task...">
+            <button onclick="addTask()">
+                <i class="fa-solid fa-plus"></i>
+            </button>
         </div>
 
         <ul id="taskList"></ul>
+
+        <div class="footer">
+            <span id="taskCount">0 Tasks</span>
+        </div>
+
     </div>
 
-    <script src="TO DO APP.js"></script>
+    <script src="script.js"></script>
+
 </body>
 </html>
